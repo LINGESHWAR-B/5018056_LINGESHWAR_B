@@ -1,0 +1,19 @@
+Understand Array Representation:
+o	Array Representation in Memory:
+Arrays are stored as contiguous blocks of memory, with each element being the same size. This allows for constant-time access (O(1)) to any element using its index, as the memory address of each element can be computed directly.
+
+o	Advantages:
+Fast Access: Constant-time complexity for accessing elements via indices.
+Simplicity: Easy to implement and use for fixed-size collections.
+Efficient Memory Usage: No overhead from pointers or dynamic resizing.
+
+Analysis:
+o	Analyze the time complexity of each operation (add, search, traverse, delete).
+In the Employee Management System using arrays, the time complexity for operations is as follows:
+- Add: O(1) if adding at the end, O(n) if resizing the array is needed.
+- Search: O(n) as it requires a linear scan to find an employee.
+- Traverse: O(n) because every element must be visited.
+- Delete: O(n) due to the need to shift elements after deletion.
+
+o	Discuss the limitations of arrays and when to use them.
+Arrays have limitations, such as fixed size, inefficient insertions/deletions, and contiguous memory requirement. They are ideal for scenarios where the number of elements is known in advance and frequent random access is required. In an employee management system, arrays work well for small, static datasets but become inefficient with large, dynamic datasets due to their inflexibility.

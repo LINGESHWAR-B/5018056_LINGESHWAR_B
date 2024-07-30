@@ -1,0 +1,19 @@
+Understand Search Algorithms:
+o	Linear Search:
+A simple search algorithm that scans through each element of the list sequentially until the target is found or the end of the list is reached.
+- Best Case: O(1) if the element is the first in the list.
+- Average Case: O(n), as it may need to check half of the elements on average.
+- Worst Case: O(n), if the element is the last or not present.
+
+o	Binary Search:
+A more efficient search algorithm that works on sorted lists by repeatedly dividing the search interval in half. It compares the target value to the middle element of the list and eliminates half of the remaining elements from consideration based on the comparison.
+- Best Case: O(1) if the element is at the middle.
+- Average Case: O(log n), as the search space is halved with each comparison.
+- Worst Case: O(log n), as it continually halves the search space.
+
+Analysis:
+o	Compare the time complexity of linear and binary search.
+Linear search has a time complexity of O(n), where n is the number of books. It scans each book sequentially until it finds a match. Binary search, on the other hand, has a time complexity of O(log n) but requires the list to be sorted. It repeatedly divides the search interval in half, making it more efficient for large datasets.
+
+o	Discuss when to use each algorithm based on the data set size and order.
+Use linear search for small or unsorted datasets due to its simplicity and no need for prior sorting. Use binary search for large, sorted datasets to leverage its faster search capabilities, significantly reducing search time.

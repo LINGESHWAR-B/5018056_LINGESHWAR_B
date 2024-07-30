@@ -1,0 +1,27 @@
+Understand Linked Lists:
+o	Singly Linked List:
+A singly linked list consists of nodes where each node contains data and a reference (or pointer) to the next node in the sequence. It allows for efficient insertion and deletion at the beginning or end but requires traversal to access elements in between.
+Operations:
+- Insert: O(1) at the beginning, O(n) at the end (without a tail reference).
+- Search: O(n).
+- Delete: O(n) (requires traversal to find the node).
+
+o	Doubly Linked List:
+A doubly linked list is similar to a singly linked list but with an additional reference (or pointer) to the previous node. This allows for bidirectional traversal and can make some operations more efficient, such as deletion.
+Operations:
+- Insert: O(1) at the beginning, O(1) at the end (with a tail reference).
+- Search: O(n).
+- Delete: O(1) (with a reference to the node to be deleted).
+
+Analysis:
+o	Time Complexity Analysis
+In a task management system using a singly linked list:
+- Addition: O(1) for adding at the head, O(n) for adding at the tail.
+- Deletion: O(n) for deleting a node due to traversal.
+- Traversal: O(n) for visiting all nodes.
+- Search: O(n) for finding a specific task.
+
+o	Advantages of Linked Lists Over Arrays
+Linked lists offer several advantages for dynamic data:
+- Dynamic Size: They can easily grow or shrink, avoiding the need for resizing.
+- Efficient Insertions/Deletions: Insertions and deletions are more efficient than arrays, especially at the beginning or middle, as they don’t require shifting elements.
