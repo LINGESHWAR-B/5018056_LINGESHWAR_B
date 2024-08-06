@@ -1,0 +1,27 @@
+BEGIN
+    DECLARE
+        CURSOR cur_accounts IS
+            SELECT AccountID, Balance
+            FROM Accounts;
+        
+        v_account_id Accounts.AccountID%TYPE;
+        v_balance Accounts.Balance%TYPE;
+        annual_fee CONSTANT NUMBER := 50; -- Example fee amount
+
+    BEGIN
+        OPEN cur_accounts;
+        LOOP
+            FETCH cur_accounts INTO v_account_id, v_balance;
+            EXIT WHEN cur_accounts%NOTFOUND;
+            
+            -- Deduct annual fee from balance
+            UPDATE Accounts
+            SET Balance = Balance - annual_fee, LastModified = SYSDATE
+            WHERE AccountID = v_account_id;
+
+            DBMS_OUTPUT.PUT_LINE('Applied annual fee to AccountID: ' || v_account_id);
+        END LOOP;
+        CLOSE cur_accounts;
+    END;
+END;
+/

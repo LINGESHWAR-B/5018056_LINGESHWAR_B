@@ -1,0 +1,17 @@
+CREATE OR REPLACE PROCEDURE ProcessMonthlyInterest IS
+BEGIN
+    FOR rec IN (SELECT AccountID, Balance FROM Accounts WHERE AccountType = 'Savings') LOOP
+        UPDATE Accounts
+        SET Balance = Balance * 1.01,
+            LastModified = SYSDATE
+        WHERE AccountID = rec.AccountID;
+        
+        DBMS_OUTPUT.PUT_LINE('Updated balance for AccountID: ' || rec.AccountID);
+    END LOOP;
+END ProcessMonthlyInterest;
+/
+
+BEGIN
+    ProcessMonthlyInterest;
+END;
+/

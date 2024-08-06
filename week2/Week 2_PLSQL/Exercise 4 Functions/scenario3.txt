@@ -1,0 +1,24 @@
+CREATE OR REPLACE FUNCTION HasSufficientBalance(p_account_id NUMBER, p_amount NUMBER) RETURN BOOLEAN IS
+    v_balance NUMBER;
+BEGIN
+    SELECT Balance INTO v_balance FROM Accounts WHERE AccountID = p_account_id;
+    
+    RETURN v_balance >= p_amount;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN FALSE;
+END HasSufficientBalance;
+/
+
+DECLARE
+    v_sufficient BOOLEAN;
+BEGIN
+    v_sufficient := HasSufficientBalance(1, 100);
+    
+    IF v_sufficient THEN
+        DBMS_OUTPUT.PUT_LINE('Account has sufficient balance.');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Insufficient balance.');
+    END IF;
+END;
+/

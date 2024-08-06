@@ -1,0 +1,30 @@
+BEGIN
+    DECLARE
+        CURSOR cur_loans IS
+            SELECT LoanID, InterestRate
+            FROM Loans;
+        
+        v_loan_id Loans.LoanID%TYPE;
+        v_current_rate Loans.InterestRate%TYPE;
+        v_new_rate Loans.InterestRate%TYPE;
+
+        -- Define the new policy for interest rates
+        new_interest_rate CONSTANT NUMBER := 6; -- Example new interest rate
+
+    BEGIN
+        OPEN cur_loans;
+        LOOP
+            FETCH cur_loans INTO v_loan_id, v_current_rate;
+            EXIT WHEN cur_loans%NOTFOUND;
+
+            -- Update interest rate based on new policy
+            UPDATE Loans
+            SET InterestRate = new_interest_rate
+            WHERE LoanID = v_loan_id;
+
+            DBMS_OUTPUT.PUT_LINE('Updated interest rate for LoanID: ' || v_loan_id || ' to ' || new_interest_rate);
+        END LOOP;
+        CLOSE cur_loans;
+    END;
+END;
+/

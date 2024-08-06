@@ -1,0 +1,44 @@
+CREATE OR REPLACE PACKAGE EmployeeManagement AS
+    PROCEDURE HireNewEmployee(p_employee_id NUMBER, p_name VARCHAR2, p_position VARCHAR2, p_salary NUMBER, p_department VARCHAR2);
+    PROCEDURE UpdateEmployeeDetails(p_employee_id NUMBER, p_name VARCHAR2, p_salary NUMBER);
+    FUNCTION CalculateAnnualSalary(p_employee_id NUMBER) RETURN NUMBER;
+END EmployeeManagement;
+/
+
+CREATE OR REPLACE PACKAGE BODY EmployeeManagement AS
+
+    PROCEDURE HireNewEmployee(p_employee_id NUMBER, p_name VARCHAR2, p_position VARCHAR2, p_salary NUMBER, p_department VARCHAR2) IS
+    BEGIN
+        INSERT INTO Employees (EmployeeID, Name, Position, Salary, Department, HireDate)
+        VALUES (p_employee_id, p_name, p_position, p_salary, p_department, SYSDATE);
+        DBMS_OUTPUT.PUT_LINE('Hired new employee with ID: ' || p_employee_id);
+    END HireNewEmployee;
+
+    PROCEDURE UpdateEmployeeDetails(p_employee_id NUMBER, p_name VARCHAR2, p_salary NUMBER) IS
+    BEGIN
+        UPDATE Employees
+        SET Name = p_name, Salary = p_salary
+        WHERE EmployeeID = p_employee_id;
+        DBMS_OUTPUT.PUT_LINE('Updated employee details for ID: ' || p_employee_id);
+    END UpdateEmployeeDetails;
+
+    FUNCTION CalculateAnnualSalary(p_employee_id NUMBER) RETURN NUMBER IS
+        v_salary NUMBER;
+    BEGIN
+        SELECT Salary INTO v_salary
+        FROM Employees
+        WHERE EmployeeID = p_employee_id;
+        RETURN v_salary * 12; -- Assuming monthly salary
+    END CalculateAnnualSalary;
+
+END EmployeeManagement;
+/
+
+BEGIN
+    EmployeeManagement.HireNewEmployee(p_employee_id => 3, p_name => 'Mark Twain', p_position => 'Analyst', p_salary => 55000, p_department => 'Finance');
+
+    EmployeeManagement.UpdateEmployeeDetails(p_employee_id => 3, p_name => 'Mark Twain', p_salary => 60000);
+
+    DBMS_OUTPUT.PUT_LINE('Annual salary for EmployeeID 3: ' || EmployeeManagement.CalculateAnnualSalary(p_employee_id => 3));
+END;
+/
